@@ -1,0 +1,30 @@
+---
+title: "Lab 1: Intro to R"
+author: "Your name"
+date: "February 19, 2020"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(eval = TRUE, results = FALSE)
+library(tidyverse)
+library(openintro)
+# Load Arbuthnot data
+source("http://www.openintro.org/stat/data/arbuthnot.R")
+```
+
+***
+
+### Exercise 1
+
+```{r eval = TRUE}
+arbuthnot$girls
+```
+
+
+### Exercise 2
+
+```{r}
+
+```
+

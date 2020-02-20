@@ -5,11 +5,19 @@ output:
     css: ../lab.css
     highlight: pygments
     theme: cerulean
-    toc: true
-    toc_float: true
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: no
+layout: topic
+geometry: margin=0.75in
+fontfamily: mathpazo
+fontsize: 10pt
+editor_options:
+  chunk_output_type: console
 ---
 
-```{r global_options, include=FALSE}
+```{r global_options, include=FALSE, fig.width = 5}
 knitr::opts_chunk$set(eval = TRUE, results = FALSE)
 library(tidyverse)
 library(openintro)
@@ -28,9 +36,11 @@ Today we begin with the fundamental building blocks of R and RStudio: the interf
 Go ahead and launch RStudio. 
 You should see a window that looks like the image shown below.
 
-```{r r-interface-2020, echo=FALSE, results="asis"}
+```{r r-interface-2020, echo = FALSE, out.width = "5in"}
 knitr::include_graphics("img/r-interface-2020.png")
 ```
+
+<!-- ![rinterface](img/r-interface-2020.png) -->
 
 The panel on the lower left is where the action happens. It's called the *console*. 
 Everytime you launch RStudio, it will have the same text at the top of the console telling you the version of R that you're running. 
@@ -79,13 +89,21 @@ You can find more about the packages in the tidyverse at [tidyverse.org](http://
 
 We will be using R Markdown to create reproducible lab reports. See the following videos describing why and how:
 
-[**Why use R Markdown for Lab Reports?**](https://youtu.be/lNWVQ2oxNho)
+*Why use R Markdown for Lab Reports?* [https://youtu.be/lNWVQ2oxNho](https://youtu.be/lNWVQ2oxNho)
 <iframe width="560" height="315" src="https://www.youtube.com/embed/lNWVQ2oxNho" frameborder="0" allowfullscreen></iframe>
 
-[**Using R Markdown for Lab Reports in RStudio**](https://youtu.be/o0h-eVABe9M)
+*How to use R Markdown for Lab Reports in RStudio* [https://youtu.be/o0h-eVABe9M](https://youtu.be/o0h-eVABe9M)
 <iframe width="560" height="315" src="https://www.youtube.com/embed/o0h-eVABe9M" frameborder="0" allowfullscreen></iframe>
 
-In a nuthshell, in RStudio, go to New File -> R Markdown... Then, choose From Template and then choose `Lab Report for OpenIntro Statistics Lab 1` from the list of templates.
+<!-- In a nuthshell, in RStudio, go to New File -> R Markdown... Then, choose From Template and then choose `Lab Report for OpenIntro Statistics Lab 1` from the list of templates. -->
+
+In a nuthshell, in RStudio, go to New File -> R Markdown... Then, type in the name of the lab (e.g., Intro to R and RStudio) and hit ok. As in the video above, insert the following code at the top of your RMarkdown document, just below the YAML header with the title, author, date, and output information:
+
+```{r rmd_template, echo = FALSE, results = "asis"}
+knitr::include_graphics("img/rmd_template.png")
+```
+
+<!-- ![Rmd template](img/rmd_template.png){width=50%} -->
 
 Going forward you should refrain from typing your code directly in the console, and instead type any code (final correct answer, or anything you're just trying out) in the R Markdown file and run the chunk using either the Run button on the chunk  (green sideways triangle) or by highlighting the code and clicking Run on the top  right corner of the R Markdown editor. 
 If at any point you need to start over, you  can Run All Chunks above the chunk you're working in by clicking on the down arrow in the code chunk.
@@ -94,8 +112,12 @@ If at any point you need to start over, you  can Run All Chunks above the chunk 
 
 To get started, let's take a peek at the data.
 
-```{r load-abrbuthnot-data}
-arbuthnot
+<!-- # ```{r load-abrbuthnot-data} -->
+<!-- # arbuthnot -->
+<!-- # ``` -->
+
+```{r load-abrbuthnot-data, eval=TRUE}
+source("http://www.openintro.org/stat/data/arbuthnot.R")
 ```
 
 You can run the command by
@@ -176,7 +198,7 @@ And if `[43]` starts a line, then that would mean the first number on that line 
 
 R has some powerful functions for making graphics. We can create a simple plot of the number of girls baptized per year with the command
 
-```{r plot-girls-vs-year}
+```{r plot-girls-vs-year, eval = FALSE}
 ggplot(data = arbuthnot, aes(x = year, y = girls)) + 
   geom_point()
 ```
@@ -194,7 +216,7 @@ With `ggplot()`:
 
 For instance, if you wanted to visualize the above plot using a line graph, you would replace `geom_point()` with `geom_line()`.
 
-```{r plot-girls-vs-year-line}
+```{r plot-girls-vs-year-line, eval = FALSE}
 ggplot(data = arbuthnot, aes(x = year, y = girls)) + 
   geom_line()
 ```
@@ -267,7 +289,7 @@ In this case, you already have an object called `arbuthnot`, so this command upd
 
 You can make a line plot of the total number of baptisms per year with the command
 
-```{r plot-total-vs-year}
+```{r plot-total-vs-year, eval = FALSE}
 ggplot(data = arbuthnot, aes(x = year, y = total)) + 
   geom_line()
 ```
@@ -322,7 +344,7 @@ All other columns in the `arbuthnot` data frame have values that are numerical (
 Here, we've asked R to create *logical* data, data where the values are either `TRUE` or `FALSE`. 
 In general, data analysis will involve many different kinds of data types, and one reason for using R is that it is able to represent and compute with many of them.
 
-## More Practice
+### More Practice
 
 In the previous few pages, you recreated some of the displays and preliminary analysis of Arbuthnot's baptism data. 
 Your assignment involves repeating these steps, but for present day birth records in the United States. 
@@ -369,7 +391,7 @@ That was a short introduction to R and RStudio, but we will provide you with mor
 
 In this course we will be using the suite of R packages from the **tidyverse**. 
 The book [R For Data Science](https://r4ds.had.co.nz/) by Grolemund and Wickham is a fantastic resource for data analysis in R with the tidyverse. 
-If you are googling for R code, make sureto also include these package names in your search query. For example, instead of googling "scatterplot in R", google "scatterplot in R with the tidyverse".
+If you are googling for R code, make sure to also include these package names in your search query. For example, instead of googling "scatterplot in R", google "scatterplot in R with the tidyverse".
 
 These cheatsheets may come in handy throughout the semester:
 
